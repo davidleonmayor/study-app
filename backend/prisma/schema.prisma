@@ -1,0 +1,107 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String   @db.VarChar(50)
+  password  String   @db.VarChar(60) // Almacena hash (bcrypt genera ~60 chars)
+  email     String   @unique @db.VarChar(50)
+  token     String?  @unique @db.VarChar(6) // Único y nullable para tokens temporales
+  confirmed Boolean  @default(false)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // Relación uno a muchos con Budget
+  budgets Budget[]
+
+  @@index([email]) // Índice para búsquedas rápidas por email, es para que las busquedas sean más rápidas
+}
+
+model Budget {
+  id        String   @id @default(cuid())
+  name      String   @db.VarChar(100)
+  amount    Decimal  @db.Decimal(15, 2) // 15 dígitos totales, 2 decimales
+  userId    String   @map("user_id")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // Relaciones
+  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  expenses Expense[]
+
+  @@index([userId]) // Índice para mejorar consultas por usuario
+}
+
+model Expense {
+  id        String   @id @default(cuid())
+  name      String   @db.VarChar(100)
+  amount    Decimal  @db.Decimal(15, 2)
+  budgetId  String   @map("budget_id")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // Relación con Budget
+  budget Budget @relation(fields: [budgetId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  @@index([budgetId]) // Índice para consultas por presupuesto
+}
+
+// ----------  despues de hacer la primera version ----------
+// model User {
+//   id        String  @id @default(cuid())
+//   name      String  @db.VarChar(50)
+//   password  String  @db.VarChar(60)
+//   email     String  @unique @db.VarChar(50)
+//   token     String? @unique @db.VarChar(6)
+//   confirmed Boolean @default(false)
+
+//   budgets       Budget[]             @relation("OwnerBudgets")
+//   contributions BudgetContribution[]
+//   notifications Notification[]
+//   createdAt     DateTime             @default(now())
+// }
+
+// model Budget {
+//   id            String               @id @default(cuid())
+//   title         String
+//   description   String?
+//   targetAmount  Float // meta total
+//   savedAmount   Float                @default(0) // acumulado actual
+//   startDate     DateTime             @default(now())
+//   endDate       DateTime // fecha límite
+//   frequencyDays Int // cada cuántos días se notifica
+//   ownerId       String
+//   owner         User                 @relation("OwnerBudgets", fields: [ownerId], references: [id])
+//   contributions BudgetContribution[]
+//   notifications Notification[]
+//   createdAt     DateTime             @default(now())
+// }
+
+// model BudgetContribution {
+//   id        String   @id @default(cuid())
+//   amount    Float    @default(0) // cuánto aportó
+//   userId    String
+//   budgetId  String
+//   user      User     @relation(fields: [userId], references: [id])
+//   budget    Budget   @relation(fields: [budgetId], references: [id])
+//   createdAt DateTime @default(now()) // histórico
+// }
+
+// model Notification {
+//   id       String   @id @default(cuid())
+//   message  String
+//   sentAt   DateTime @default(now())
+//   budgetId String
+//   userId   String
+//   budget   Budget   @relation(fields: [budgetId], references: [id])
+//   user     User     @relation(fields: [userId], references: [id])
+// }

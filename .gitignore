@@ -1,0 +1,19 @@
+# backend
+*node_modules/
+.env
+.env.local  
+package-lock.json
+
+.DS_Store
+dist/
+
+# database
+database/generated/prisma
+/generated/prisma
+
+#IDEs
+.idea/
+
+
+# frontend
+**/.next

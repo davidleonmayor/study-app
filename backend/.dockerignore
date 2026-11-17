@@ -1,0 +1,182 @@
+# ==================== DEPENDENCIES ====================
+**/node_modules
+**/npm-debug.log
+**/yarn-debug.log
+**/yarn-error.log
+**/pnpm-debug.log
+**/.pnpm-store
+**/.pnpm-lock.yaml.snapshot
+
+# ==================== BUILD OUTPUTS ====================
+**/dist
+**/build
+**/.next
+**/out
+**/coverage
+**/.nyc_output
+**/.stryker-tmp
+**/storybook-static
+
+# ==================== ENVIRONMENT & SECRETS ====================
+**/.env
+**/.env.*
+!**/.env.example
+!**/.env.docker.example
+**/.env.local
+**/.env.development.local
+**/.env.test.local
+**/.env.production.local
+**/config/secrets.*
+**/secrets/
+**/*.pem
+**/*.key
+**/*.crt
+**/*.p12
+**/*.pfx
+
+# ==================== GIT & VCS ====================
+**/.git
+**/.gitignore
+**/.gitattributes
+**/.gitmodules
+**/.svn
+**/.hg
+
+# ==================== DOCKER RELATED ====================
+**/Dockerfile*
+**/docker-compose*.yml
+**/docker-compose*.yaml
+**/.dockerignore
+**/docker/
+**/k8s/
+**/kubernetes/
+
+# ==================== DOCUMENTATION ====================
+**/README.md
+**/CHANGELOG.md
+**/CONTRIBUTING.md
+**/LICENSE
+**/docs/
+**/*.md
+!**/README.docker.md
+
+# ==================== IDE & EDITOR ====================
+**/.vscode
+**/.idea
+**/.vs
+**/.vscode-test
+**/*.swp
+**/*.swo
+**/*~
+**/.DS_Store
+**/Thumbs.db
+
+# ==================== TESTING ====================
+**/tests/
+**/test/
+**/__tests__/
+**/*.test.*
+**/*.spec.*
+**/jest.config.*
+**/vitest.config.*
+**/cypress/
+**/playwright/
+**/e2e/
+**/.coverage
+**/coverage.xml
+**/junit.xml
+
+# ==================== LINTING & FORMATTING ====================
+**/.eslintrc*
+**/.prettierrc*
+**/.editorconfig
+**/.stylelintrc*
+**/tsconfig.json
+**/jsconfig.json
+**/babel.config.*
+**/webpack.config.*
+**/rollup.config.*
+**/vite.config.*
+
+# ==================== PACKAGE MANAGERS ====================
+**/package-lock.json
+**/yarn.lock
+**/pnpm-lock.yaml
+**/.yarn/
+**/.pnp.*
+
+# ==================== LOGS & TEMP ====================
+**/logs/
+**/*.log
+**/tmp/
+**/temp/
+**/.tmp/
+**/.temp/
+**/pid
+**/*.pid
+**/*.seed
+**/lib-cov
+
+# ==================== CACHE ====================
+**/.cache/
+**/.parcel-cache/
+**/.turbo/
+**/.next/cache/
+**/node_modules/.cache/
+
+# ==================== MONITORING & PROFILING ====================
+**/.clinic/
+**/profile.*
+**/heap-*.json
+**/isolate-*
+
+# ==================== DEPLOYMENT & CI/CD ====================
+**/.github/
+**/.gitlab-ci.yml
+**/azure-pipelines.yml
+**/Jenkinsfile
+**/.travis.yml
+**/appveyor.yml
+**/deploy/
+**/deployment/
+**/helm/
+**/charts/
+
+# ==================== BACKUP & MISC ====================
+**/backups/
+**/*.backup
+**/*.bak
+**/*.old
+**/data/
+**/uploads/
+**/storage/
+**/public/uploads/
+**/static/uploads/
+
+# ==================== SPECIFIC TO PROJECT ====================
+# Database files
+**/prisma/dev.db*
+**/database.sqlite*
+
+# Frontend specific
+**/public/static/
+**/assets/
+**/static/
+**/favicon.ico
+
+# ==================== SECURITY SCANNERS ====================
+**/.snyk
+**/vulnerability-report.*
+**/audit-report.*
+
+# ==================== PERFORMANCE ====================
+**/lighthouse-report.*
+**/bundle-analyzer.*
+
+# Allow essential files
+!**/package.json
+!**/prisma/schema.prisma
+!**/prisma/seed.*
+!**/public/favicon.ico
+!**/public/robots.txt
+!**/public/manifest.json
